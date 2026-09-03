@@ -1,0 +1,119 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+/* ============================================================
+   MMSU official identity — strict four-color system.
+   Palette (ONLY these + white):
+     Green  #0C4B05  (primary — text, borders, icons, chrome)
+     Yellow #FFCD00  (emphasis / warning states)
+     Red    #DE1900  (danger / errors)
+     Blue   #002AFC  (info / certified states)
+   White is used only as the base/background. No tints, no
+   gradients, no transparency-derived shades, no grays.
+
+   Fonts: Calibri (body), Garamond (headings), Arial Narrow
+   (condensed / tabular data), Advantage (display wordmark).
+   ============================================================ */
+@theme {
+  --font-sans: 'Calibri', 'Arial Narrow', Arial, sans-serif;
+  --font-serif: 'Garamond', 'EB Garamond', Georgia, serif;
+  --font-mono: 'Arial Narrow', 'Calibri', Arial, sans-serif;
+  --font-display: 'Advantage', 'Garamond', 'EB Garamond', serif;
+
+  /* Base surfaces — white only */
+  --color-canvas: #ffffff;
+  --color-surface: #ffffff;
+
+  /* Green as the single ink + structure color (no lighter grays) */
+  --color-ink: #0c4b05;
+  --color-ink-soft: #0c4b05;
+  --color-ink-mute: #0c4b05;
+  --color-line: #0c4b05;
+  --color-line-soft: #0c4b05;
+
+  /* Brand green — single flat value, no shades.
+     The *-50/-100 slots resolve to white because they are only
+     ever used as backgrounds behind green text/icons. */
+  --color-brand-50: #ffffff;
+  --color-brand-100: #ffffff;
+  --color-brand-200: #0c4b05;
+  --color-brand-300: #0c4b05;
+  --color-brand-500: #0c4b05;
+  --color-brand-600: #0c4b05;
+  --color-brand-700: #0c4b05;
+  --color-brand-800: #0c4b05;
+
+  /* Official system-state colors */
+  --color-info: #002afc;     /* blue */
+  --color-info-bg: #ffffff;
+  --color-warn: #0c4b05;     /* green text sits on the yellow fill */
+  --color-warn-bg: #ffcd00;  /* yellow */
+  --color-danger: #de1900;   /* red */
+  --color-danger-bg: #ffffff;
+  --color-neutral-bg: #ffffff;
+
+  --radius: 8px;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  * {
+    border-color: var(--color-line);
+  }
+  ::selection {
+    background: #ffcd00;
+    color: #0c4b05;
+  }
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 8px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #0c4b05;
+    background-clip: padding-box;
+  }
+}
+
+@layer utilities {
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-toast { animation: toastIn 0.18s ease-out; }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .animate-fade { animation: fadeIn 0.15s ease-out; }
+}
