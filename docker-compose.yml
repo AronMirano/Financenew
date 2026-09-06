@@ -28,7 +28,7 @@ services:
       - DB_PORT=3306
       - DB_DATABASE=gfms
       - DB_USERNAME=gfms_user
-      - DB_PASSWORD=gfms_pass
+      - DB_PASSWORD=Mmsu2026Secure!
     depends_on:
       database:
         condition: service_healthy
@@ -36,11 +36,13 @@ services:
   database:
     image: mysql:8.0
     container_name: GFMS-DB
+    ports:
+	- "3307:3306"
     environment:
       MYSQL_DATABASE: gfms
       MYSQL_USER: gfms_user
-      MYSQL_PASSWORD: gfms_pass
-      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_PASSWORD: Mmsu2026Secure!
+      MYSQL_ROOT_PASSWORD: RootPass2026Secure!
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
