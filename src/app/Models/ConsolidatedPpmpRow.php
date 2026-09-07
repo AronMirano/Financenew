@@ -27,6 +27,11 @@ class ConsolidatedPpmpRow extends Model
         'contingency',
         'realignment',
         'request',
+        'obr',
+        'payee',
+        'description',
+        'amount',
+        'balance',
     ];
 
     protected function casts(): array
@@ -37,6 +42,8 @@ class ConsolidatedPpmpRow extends Model
             'co' => 'float',
             'contingency' => 'float',
             'realignment' => 'float',
+            'amount' => 'float',
+            'balance' => 'float',
         ];
     }
 
