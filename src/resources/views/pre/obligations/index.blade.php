@@ -49,6 +49,7 @@
                             <x-th>Date</x-th>
                             <x-th>Payee / Office</x-th>
                             <x-th right>Total Amount</x-th>
+                            <x-th right>Remaining Balance</x-th>
                             <x-th>Status</x-th>
                             <x-th />
                         </tr>
@@ -65,6 +66,9 @@
                                     @endif
                                 </x-td>
                                 <x-td right>{{ Format::peso($document->total()) }}</x-td>
+                                <x-td right class="{{ $document->remainingBalance() < 0 ? 'text-danger' : '' }}">
+                                    {{ Format::peso($document->remainingBalance()) }}
+                                </x-td>
                                 <x-td><x-status-badge :status="$document->status" /></x-td>
                                 <x-td right>
                                     <x-button size="sm" variant="secondary"

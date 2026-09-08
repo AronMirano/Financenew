@@ -31,6 +31,7 @@ class FinDocument extends Model
         'payee_name',
         'office',
         'address',
+        'allotment_balance',
         'cert_a_officer_id',
         'cert_a_date',
         'cert_b_officer_id',
@@ -42,6 +43,7 @@ class FinDocument extends Model
     {
         return [
             'date' => 'date',
+            'allotment_balance' => 'float',
         ];
     }
 
@@ -85,6 +87,12 @@ class FinDocument extends Model
     public function dueDemandable(): float
     {
         return Format::obrDueDemandable($this->ledgerSum('payable'), $this->ledgerSum('payment'));
+    }
+
+    /** Remaining allotment balance = manual allotment balance − total obligations. */
+    public function remainingBalance(): float
+    {
+        return (float) $this->allotment_balance - $this->total();
     }
 
     /** Status is derived from the certifications and the running ledger. */

@@ -17,8 +17,11 @@ use Illuminate\Validation\Rule;
  */
 class LedgerEntryController extends Controller
 {
-    public function __invoke(Request $request, FinDocument $document): RedirectResponse
+public function __invoke(Request $request, FinDocument $document): RedirectResponse
     {
+        // Route model binding may not load all columns; explicitly reload with kind
+        $document = $document->fresh(['kind']);
+
         $instruments = Reference::paymentInstruments($document->kind);
 
         $validated = $request->validate([

@@ -65,8 +65,15 @@
                     <x-input name="office" value="{{ old('office') }}" placeholder="Enter office" />
                 </x-field>
 
-                <x-field label="Address">
-                    <x-input name="address" value="{{ old('address') }}" placeholder="Enter address" />
+                <x-field label="Address" hint="Fixed address for MMSU">
+                    <x-input name="address" value="{{ $fixedAddress }}" readonly />
+                    <input type="hidden" name="address" value="{{ $fixedAddress }}">
+                </x-field>
+
+                <x-field label="Allotment Balance" hint="Total allotment available for this office (enter manually)">
+                    <x-input name="allotment_balance" type="number" step="0.01" min="0"
+                             value="{{ old('allotment_balance', 0) }}" inputmode="decimal"
+                             placeholder="0.00" class="text-right tnum" />
                 </x-field>
             </section>
 

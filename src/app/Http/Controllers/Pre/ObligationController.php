@@ -22,6 +22,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ObligationController extends Controller
 {
     private const PAGE_SIZE = 10;
+    private const FIXED_ADDRESS = '16 Quiling Sur, Batac City, Ilocos Norte, Philippines 2906';
 
     /**
      * Per-kind presentation config — the PHP equivalent of the prototype's
@@ -87,6 +88,7 @@ class ObligationController extends Controller
             // Certification B is pre-stamped with the signed-in budget officer,
             // matching the prototype's default.
             'defaultCertB' => 'p-austria',
+            'fixedAddress' => self::FIXED_ADDRESS,
         ]);
     }
 
@@ -106,7 +108,8 @@ class ObligationController extends Controller
                 'fund_cluster' => $request->string('fund_cluster')->toString(),
                 'payee_name' => $request->string('payee_name')->toString(),
                 'office' => $request->string('office')->toString() ?: null,
-                'address' => $request->string('address')->toString() ?: null,
+                'address' => self::FIXED_ADDRESS,
+                'allotment_balance' => (float) $request->input('allotment_balance', 0),
                 'cert_a_officer_id' => $request->input('cert_a_officer_id') ?: null,
                 'cert_a_date' => $request->input('cert_a_officer_id') ? $today : null,
                 'cert_b_officer_id' => $request->input('cert_b_officer_id') ?: null,

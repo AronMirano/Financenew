@@ -4,6 +4,8 @@
 
     $refLabel = $document->referenceLabel();
     $total = $document->total();
+    $allotmentBalance = (float) $document->allotment_balance;
+    $remainingBalance = $document->remainingBalance();
 @endphp
 
 <x-layouts.app>
@@ -32,6 +34,14 @@
                 <x-obligations.meta label="Office / Address">
                     {{ collect([$document->office, $document->address])->filter()->join(' · ') ?: '—' }}
                 </x-obligations.meta>
+                @if ($allotmentBalance > 0)
+                    <x-obligations.meta label="Allotment Balance">
+                        {{ Format::peso($allotmentBalance) }}
+                    </x-obligations.meta>
+                    <x-obligations.meta label="Remaining Balance" :class="$remainingBalance < 0 ? 'text-danger' : ''">
+                        {{ Format::peso($remainingBalance) }}
+                    </x-obligations.meta>
+                @endif
             </section>
 
             {{-- ---- Line items ---- --}}

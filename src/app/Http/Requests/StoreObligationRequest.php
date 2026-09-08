@@ -32,6 +32,7 @@ class StoreObligationRequest extends FormRequest
             'payee_name' => ['required', 'string', 'max:255'],
             'office' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string', 'max:255'],
+            'allotment_balance' => ['nullable', 'numeric', 'min:0'],
 
             'lines' => ['required', 'array', 'min:1'],
             'lines.*.rc_acronym' => ['nullable', 'string', 'in:'.implode(',', $rcAcronyms)],
